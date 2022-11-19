@@ -1,0 +1,107 @@
+ 
+
+<div class="content" role="main">
+
+  
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">BookMark Manager</h1>
+      
+    </div>
+    <div class="col-md-12"> 
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Add BookMark
+      </button>
+    </div>
+    <div class="col-md-6"> 
+       
+  <div class="row mt-5">
+    <div class="col-md-12 mb-2" *ngFor="let data of bookmarkData">
+        <h4>{{myFunc(data.Category)}}</h4>
+        <div class="card" style="height: 160px;overflow: auto;">
+            <div class="card-body">
+                <div class="row  p-2 mb-2 hoverable" >
+                    <div class="col-md-8 mt-2">
+                      {{data.Title}}
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-sm btn-success float-right" (click)="details(data.Category)">Details</button>
+                    </div>
+                </div>
+                
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-6"> 
+      <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>BookMark Details</h4>
+            <div class="card" *ngIf="(Title)">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Title: {{Title}}
+                        </div>
+                        <div class="col-md-12">
+                            URL: {{URL}}
+                        </div>
+                        <div class="col-md-12">
+                            Category: {{CatName}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+ 
+ 
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <form  [formGroup]="bookMarkForm" (ngSubmit)="onSubmit()" class="sign-in-form modal-content">
+        <div class="">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add BookMark</h5>
+            <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="input-field mb-2"> 
+              <input type="text" class="form-control" formControlName="Title" placeholder="Title" />
+              <p class="alert alert-danger p-0" *ngIf="bookMarkForm.controls['Title'].hasError('maxlength')">
+                Your title cannot exceed 30 characters.
+              </p>
+            </div>
+            <div class="input-field mb-2"> 
+              <input type="text" class="form-control" formControlName="URL" placeholder="URL" />
+              <p class="alert alert-danger p-0" *ngIf="bookMarkForm.controls['URL'].hasError('pattern')">
+                Invalid URL.
+              </p>
+            </div>
+            <div class="input-field mb-2 " style=" flex-direction: row; display: flex;">  
+              <select id="country" class="form-control w-70" formControlName="Category">
+                <option *ngFor="let c of categorys" [ngValue]="c.id">{{ c.val }}</option>
+            </select>
+            <button type="button" class="plus btn btn-sm w-25 btn-success m-0 ml-2" >
+              <i class="bi bi-plus" style="font-size: 14px;"></i>
+            </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="bookMarkForm.invalid">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+
+</div>
+
+<router-outlet></router-outlet>

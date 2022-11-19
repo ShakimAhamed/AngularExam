@@ -1,0 +1,19 @@
+ 
+<div class="row mt-5">
+    <div class="col-md-12 mb-2" *ngFor="let data of bookmarkData">
+        <h4>{{data.Category}}</h4>
+        <div class="card" style="height: 160px;overflow: auto;">
+            <div class="card-body">
+                <div class="row  p-2 mb-2 hoverable" >
+                    <div class="col-md-8 mt-2">
+                       {{data.Title}}
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-sm btn-success float-right" >Details</button>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+</div>
